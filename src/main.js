@@ -12,5 +12,6 @@ const ul = document.createElement("ul");
 ul.classList.add("temporary-grid");
 container.append(ul);
 
-const workshops = await getWorkshops(1, 20);
-workshops.forEach((workshop) => ul.append(createCard(workshop)));
+getWorkshops(1, 20).then((workshops) => {
+  workshops.forEach((workshop) => ul.append(createCard(workshop)));
+});
