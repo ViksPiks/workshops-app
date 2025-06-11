@@ -1,0 +1,13 @@
+@import url("bootstrap/dist/css/bootstrap.css");
+@import url("bootstrap-icons/font/bootstrap-icons.css");
+
+.temporary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
