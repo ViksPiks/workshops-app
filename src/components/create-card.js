@@ -5,7 +5,7 @@ export const createCard = (workshop) => {
   const img = document.createElement("img");
   img.setAttribute("src", workshop.image);
   img.setAttribute("alt", `${workshop.name} workshop photo`);
-  img.classList.add("card-img-top");
+  img.classList.add("card-img-top", "card-workshop-photo");
   card.append(img);
 
   const cardBody = document.createElement("div");

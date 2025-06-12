@@ -11,3 +11,8 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
+.card-workshop-photo {
+  height: 200px;
+  object-fit: cover;
+}
