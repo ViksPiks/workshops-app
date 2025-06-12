@@ -13,7 +13,7 @@ const container = createContainer();
 app.append(container);
 
 const renderWorkshops = (page) => {
-  getWorkshops(page).then(({ workshops, pagination }) => {
+  getWorkshops(page, 20).then(({ workshops, pagination }) => {
     container.replaceChildren(
       createWorkshopList(workshops),
       createPagination(pagination.page, pagination.totalPages)
