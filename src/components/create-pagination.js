@@ -37,39 +37,28 @@ const createPaginationCounter = (currentPage, totalPages) => {
 const PREVIOUS_BUTTON_ID = "prev";
 const NEXT_BUTTON_ID = "next";
 
-export const createPagination = (currentPage = 1, totalPages = 5) => {
+export const createPagination = (currentPage, totalPages) => {
   const nav = document.createElement("nav");
   nav.setAttribute("aria-label", "Workshops pagination");
   nav.classList.add("pagination", "gap-2", "justify-content-center");
 
   nav.addEventListener("click", (e) => {
-    e.preventDefault();
     if (e.target.id === PREVIOUS_BUTTON_ID) {
-      currentPage -= 1;
-      dispatchCustomPageChangeEvent(currentPage);
+      dispatchCustomPageChangeEvent(currentPage - 1);
     }
     if (e.target.id === NEXT_BUTTON_ID) {
-      currentPage += 1;
-      dispatchCustomPageChangeEvent(currentPage);
+      dispatchCustomPageChangeEvent(currentPage + 1);
     }
   });
 
-  const renderPagination = () => {
-    const isFirstPage = currentPage === 1;
-    const isLastPage = currentPage === totalPages;
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
 
-    nav.replaceChildren(
-      createPaginationButton("Previous", PREVIOUS_BUTTON_ID, isFirstPage),
-      createPaginationCounter(currentPage, totalPages),
-      createPaginationButton("Next", NEXT_BUTTON_ID, isLastPage)
-    );
-  };
-
-  document.addEventListener(CUSTOM_PAGE_CHANGE_EVENT_ID, () =>
-    renderPagination()
+  nav.append(
+    createPaginationButton("Previous", PREVIOUS_BUTTON_ID, isFirstPage),
+    createPaginationCounter(currentPage, totalPages),
+    createPaginationButton("Next", NEXT_BUTTON_ID, isLastPage)
   );
-
-  renderPagination();
 
   return nav;
 };
