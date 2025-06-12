@@ -44,9 +44,11 @@ export const createPagination = (currentPage, totalPages) => {
 
   nav.addEventListener("click", (e) => {
     if (e.target.id === PREVIOUS_BUTTON_ID) {
+      window.scrollTo({ top: 0 });
       dispatchCustomPageChangeEvent(currentPage - 1);
     }
     if (e.target.id === NEXT_BUTTON_ID) {
+      window.scrollTo({ top: 0 });
       dispatchCustomPageChangeEvent(currentPage + 1);
     }
   });
