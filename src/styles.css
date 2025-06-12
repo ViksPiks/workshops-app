@@ -13,6 +13,7 @@ ul {
 }
 
 .card-workshop-photo {
+  background-color: rgb(211, 211, 211);
   height: 200px;
   object-fit: cover;
 }
