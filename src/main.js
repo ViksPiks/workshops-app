@@ -22,7 +22,9 @@ const renderWorkshops = (page) => {
   });
 };
 
-export const favoriteWorkshops = [];
+const FAVORITE_WORKSHOPS_LOCAL_STORAGE_KEY = "favoriteWorkshops";
+export const favoriteWorkshops =
+  JSON.parse(localStorage.getItem(FAVORITE_WORKSHOPS_LOCAL_STORAGE_KEY)) ?? [];
 
 const favoritesContainer = createContainer();
 app.append(favoritesContainer);
@@ -44,6 +46,10 @@ document.addEventListener(CUSTOM_PAGE_CHANGE_EVENT_ID, (e) =>
   renderWorkshops(e.detail.currentPage)
 );
 
-document.addEventListener(CUSTOM_FAVORITES_CHANGE_EVENT_ID, () =>
-  renderFavorites()
-);
+document.addEventListener(CUSTOM_FAVORITES_CHANGE_EVENT_ID, () => {
+  renderFavorites();
+  localStorage.setItem(
+    FAVORITE_WORKSHOPS_LOCAL_STORAGE_KEY,
+    JSON.stringify(favoriteWorkshops)
+  );
+});
