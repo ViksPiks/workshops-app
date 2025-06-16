@@ -24,7 +24,7 @@ export const createCard = (workshop) => {
 
   const button = document.createElement("button");
   button.setAttribute("type", "button");
-  button.classList.add("btn", "btn-primary", "mt-auto");
+  button.classList.add("btn", "btn-danger", "mt-auto");
   button.setAttribute("aria-label", "add workshop to favorites");
   cardBody.append(button);
 
