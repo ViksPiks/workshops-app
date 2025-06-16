@@ -1,3 +1,14 @@
+import { favoriteWorkshops } from "../main";
+
+export const CUSTOM_FAVORITES_CHANGE_EVENT_ID = "custom-favorites-change";
+
+const dispatchCustomFavoritesChangeEvent = () => {
+  const customFavoritesChangeEvent = new CustomEvent(
+    CUSTOM_FAVORITES_CHANGE_EVENT_ID
+  );
+  document.dispatchEvent(customFavoritesChangeEvent);
+};
+
 export const createCard = (workshop) => {
   const card = document.createElement("li");
   card.classList.add("card");
@@ -24,9 +35,35 @@ export const createCard = (workshop) => {
 
   const button = document.createElement("button");
   button.setAttribute("type", "button");
-  button.classList.add("btn", "btn-danger", "mt-auto");
+  button.classList.add("btn", "btn-outline-danger", "mt-auto");
   button.setAttribute("aria-label", "add workshop to favorites");
   cardBody.append(button);
+  const isInFavorites = favoriteWorkshops.find((shop) => {
+    return shop.slug === workshop.slug;
+  });
+  if (isInFavorites) {
+    button.classList.toggle("btn-danger");
+    button.classList.toggle("btn-outline-danger");
+  }
+  button.addEventListener("click", () => {
+    const isInFavorites = favoriteWorkshops.find((shop) => {
+      return shop.slug === workshop.slug;
+    });
+
+    if (isInFavorites) {
+      const index = favoriteWorkshops.indexOf(workshop);
+      if (index > -1) {
+        favoriteWorkshops.splice(index, 1);
+      }
+    } else {
+      favoriteWorkshops.push(workshop);
+    }
+
+    button.classList.toggle("btn-danger");
+    button.classList.toggle("btn-outline-danger");
+
+    dispatchCustomFavoritesChangeEvent();
+  });
 
   const icon = document.createElement("i");
   icon.classList.add("bi", "bi-heart");

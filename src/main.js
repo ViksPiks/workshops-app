@@ -1,4 +1,5 @@
 import { getWorkshops } from "./api/get-workshops";
+import { CUSTOM_FAVORITES_CHANGE_EVENT_ID } from "./components/create-card";
 import { createContainer } from "./components/create-container";
 import {
   createPagination,
@@ -21,8 +22,28 @@ const renderWorkshops = (page) => {
   });
 };
 
+export const favoriteWorkshops = [];
+
+const favoritesContainer = createContainer();
+app.append(favoritesContainer);
+
+const renderFavorites = () => {
+  const heading = document.createElement("h2");
+  heading.textContent = "Favorite workshops";
+
+  favoritesContainer.replaceChildren(
+    heading,
+    createWorkshopList(favoriteWorkshops)
+  );
+};
+
 renderWorkshops(1);
+renderFavorites();
 
 document.addEventListener(CUSTOM_PAGE_CHANGE_EVENT_ID, (e) =>
   renderWorkshops(e.detail.currentPage)
+);
+
+document.addEventListener(CUSTOM_FAVORITES_CHANGE_EVENT_ID, () =>
+  renderFavorites()
 );
