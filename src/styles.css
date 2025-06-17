@@ -19,6 +19,11 @@ ul {
   list-style-type: none;
 }
 
+.card-body > a {
+  text-decoration: none;
+  color: #000;
+}
+
 .card-workshop-photo {
   background-color: rgb(211, 211, 211);
   height: 200px;
